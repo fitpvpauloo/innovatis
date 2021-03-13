@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from resources.fornecedor import Fornecedores, Fornecedor, NovoFornecedor
+from resources.usuario import Usuarios, Usuario, NovoUsuario
 from env import DATABASE_URI
 
 app = Flask(__name__)
@@ -11,6 +12,9 @@ api = Api(app)
 api.add_resource(Fornecedores, '/fornecedores')
 api.add_resource(Fornecedor, '/fornecedores/<int:id>')
 api.add_resource(NovoFornecedor, '/fornecedores/novo')
+api.add_resource(Usuarios, '/usuarios')
+api.add_resource(Usuario, '/usuarios/<int:id>')
+api.add_resource(NovoUsuario, '/usuarios/novo')
 
 if __name__ == '__main__':
     from sql_alchemy import banco

@@ -10,14 +10,14 @@ class NovoFornecedor(Resource):
         dados = Fornecedor.atributos.parse_args()
 
         if FornecedorModel.find_fornecedorCNPJ(dados.cnpj):
-            return {"message": "Fornecedor com CNPJ: '{}' already exists.".format(dados.cnpj)},400
+            return {"message": "Fornecedor com CNPJ: '{}' já cadastrado.".format(dados.cnpj)},400
 
         fornecedor = FornecedorModel(None, **dados)
 
         try:
             fornecedor.save_fornecedor()
         except:
-            return {"message": "An error ocurred trying to save fornecedor"}, 500
+            return {"message": "Ocorreu um erro ao salvar fornecedor"}, 500
         return fornecedor.json()
 
 class Fornecedor(Resource):
@@ -29,22 +29,21 @@ class Fornecedor(Resource):
         fornecedor = FornecedorModel.find_fornecedor(id)
         if fornecedor:
             return fornecedor.json()
-        return {'message': 'Fornecedor not found'}, 404
+        return {'message': 'Fornecedor não encontrado'}, 404
 
     def put(self, id):
         dados = Fornecedor.atributos.parse_args()
 
         fornecedorEncontrado = FornecedorModel.find_fornecedor(id)
         if fornecedorEncontrado:
-            print('Fornecedor encontrado')
             fornecedorEncontrado.update_fornecedor(**dados)
             fornecedorEncontrado.save_fornecedor()
             return fornecedorEncontrado.json(), 200
-        fornecedor = FornecedorModel(id, **dados)
+        fornecedor = FornecedorModel(None, **dados)
         try:
             fornecedor.save_fornecedor()
         except:
-            return {"message": "An error ocurred trying to save fornecedor"}, 500
+            return {"message": "Ocorreu um erro ao salvar fornecedor"}, 500
         return fornecedor.json(), 201
 
     def delete(self, id):
@@ -53,6 +52,6 @@ class Fornecedor(Resource):
             try:
                 fornecedor.delete_fornecedor()
             except:
-                return {"message": "An error ocurred trying to delete fornecedor"}, 500
-            return {"message": "Fornecedor deleted"}
-        return {"message": "Fornecedor not found"},404
+                return {"message": "Ocorreu um erro ao excluir fornecedor"}, 500
+            return {"message": "Fornecedor removido"}
+        return {"message": "Fornecedor não encontrado"},404
