@@ -1,8 +1,5 @@
 from api import app, api
-from flask import jsonify, url_for, redirect
 from ..resources.usuario import Usuarios, Usuario, NovoUsuario
-from ..models.usuario import UsuarioModel
-from flask_restful import Resource, reqparse
 
 
 @app.route('/usuarios', methods=['GET'])
