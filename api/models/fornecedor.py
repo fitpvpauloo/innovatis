@@ -1,4 +1,4 @@
-from sql_alchemy import banco
+from .sql_alchemy import banco
 
 class FornecedorModel(banco.Model):
     __tablename__ = 'FORNECEDOR'

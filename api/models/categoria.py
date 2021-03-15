@@ -17,4 +17,5 @@ class CategaoriaModal(banco.Model):
         }
 
     @classmethod
-    def find_categoria
+    def find_categoria:
+        pass

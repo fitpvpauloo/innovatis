@@ -1,12 +1,13 @@
 from flask_restful import Resource, reqparse
-from models.fornecedor import FornecedorModel
+from ..models.fornecedor import FornecedorModel
 
-class Fornecedores(Resource):
-    def get(self):
+
+class Fornecedores():
+    def get():
         return {'fornecedores': [fornecedor.json() for fornecedor in FornecedorModel.query.all()]}
 
-class NovoFornecedor(Resource):
-    def post(self):
+class NovoFornecedor():
+    def post():
         dados = Fornecedor.atributos.parse_args()
 
         if FornecedorModel.find_fornecedorCNPJ(dados.cnpj):
@@ -20,18 +21,18 @@ class NovoFornecedor(Resource):
             return {"message": "An error ocurred trying to save fornecedor"}, 500
         return fornecedor.json()
 
-class Fornecedor(Resource):
+class Fornecedor():
     atributos = reqparse.RequestParser()
     atributos.add_argument('razao_social')
     atributos.add_argument('cnpj')
 
-    def get(self, id):
+    def get(id):
         fornecedor = FornecedorModel.find_fornecedor(id)
         if fornecedor:
             return fornecedor.json()
         return {'message': 'Fornecedor not found'}, 404
 
-    def put(self, id):
+    def put(id):
         dados = Fornecedor.atributos.parse_args()
 
         fornecedorEncontrado = FornecedorModel.find_fornecedor(id)
@@ -47,7 +48,7 @@ class Fornecedor(Resource):
             return {"message": "An error ocurred trying to save fornecedor"}, 500
         return fornecedor.json(), 201
 
-    def delete(self, id):
+    def delete(id):
         fornecedor = FornecedorModel.find_fornecedor(id)
         if fornecedor:
             try:
