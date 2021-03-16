@@ -1,6 +1,6 @@
-from sql_alchemy import banco
+from .sql_alchemy import banco
 
-class CategaoriaModal(banco.Model):
+class CategoriaModel(banco.Model):
     __tablename__ = 'CATEGORIA'
 
     idcategoria = banco.Column(banco.Integer, primary_key=True)
@@ -17,5 +17,5 @@ class CategaoriaModal(banco.Model):
         }
 
     @classmethod
-    def find_categoria:
+    def find_categoria():
         pass

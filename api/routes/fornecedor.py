@@ -1,8 +1,6 @@
 from api import app, api
-from flask import jsonify, url_for, redirect
 from ..resources.fornecedor import Fornecedores, Fornecedor, NovoFornecedor
-from ..models.fornecedor import FornecedorModel
-from flask_restful import Resource, reqparse
+
 
 
 @app.route('/fornecedores', methods=['GET'])

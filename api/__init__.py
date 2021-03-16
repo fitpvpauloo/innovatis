@@ -14,6 +14,7 @@ banco.init_app(app)
 # app.run(debug=True)
 
 manager = Manager(app)
-from .routes import fornecedor, usuario
+from .routes import fornecedor, usuario, produto
 from .resources.fornecedor import Fornecedores, Fornecedor, NovoFornecedor
 from .resources.usuario import Usuarios, Usuario, NovoUsuario
+from .resources.produto import Produtos, Produto, NovoProduto
