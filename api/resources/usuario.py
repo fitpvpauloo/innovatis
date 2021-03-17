@@ -1,5 +1,11 @@
 from flask_restful import Resource, reqparse
 from ..models.usuario import UsuarioModel
+import bcrypt
+
+atributos = reqparse.RequestParser()
+atributos.add_argument('nome')
+atributos.add_argument('login')
+atributos.add_argument('senha')
 
 class Usuarios():
     def get():
@@ -7,12 +13,12 @@ class Usuarios():
 
 class NovoUsuario():
     def post():
-        dados = Usuario.atributos.parse_args()
+        dados = atributos.parse_args()
 
         if UsuarioModel.find_loginUsuario(dados.login):
             return {"message": "Usuário com login: '{}' já cadastrado!".format(dados.login)}, 400
 
-        usuario = UsuarioModel(None, **dados)
+        usuario = UsuarioModel(None, dados.nome, dados.login, bcrypt.hashpw(dados.senha.encode('utf8'), bcrypt.gensalt()))
 
         try:
             usuario.save_usuario()
@@ -21,10 +27,6 @@ class NovoUsuario():
         return usuario.json()
 
 class Usuario():
-    atributos = reqparse.RequestParser()
-    atributos.add_argument('nome')
-    atributos.add_argument('login')
-    atributos.add_argument('senha')
 
     def get(id):
         usuario = UsuarioModel.find_usuario(id)
@@ -33,7 +35,7 @@ class Usuario():
         return {"message": "Usuário não encontrado."}, 404
 
     def put(id):
-        dados = Usuario.atributos.parse_args()
+        dados = atributos.parse_args()
 
         usuarioLogin = UsuarioModel.find_loginUsuario(dados.login)
         if usuarioLogin:
@@ -42,10 +44,10 @@ class Usuario():
 
         usuarioEncontrado = UsuarioModel.find_usuario(id)
         if usuarioEncontrado:
-            usuarioEncontrado.update_usuario(**dados)
+            usuarioEncontrado.update_usuario(dados.nome, dados.login, bcrypt.hashpw(dados.senha.encode('utf8'), bcrypt.gensalt()))
             usuarioEncontrado.save_usuario()
             return usuarioEncontrado.json(), 200
-        usuario = FornecedorModel(None, **dados)
+        usuario = UsuarioModel(None, dados.nome, dados.login, bcrypt.hashpw(dados.senha.encode('utf8'), bcrypt.gensalt()))
         try:
             usuario.save_usuario()
         except:
