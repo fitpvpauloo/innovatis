@@ -9,7 +9,6 @@ class Fornecedores():
 class NovoFornecedor():
     def post():
         dados = Fornecedor.atributos.parse_args()
-
         if FornecedorModel.find_fornecedorCNPJ(dados.cnpj):
             return {"message": "Fornecedor com CNPJ: '{}' já cadastrado.".format(dados.cnpj)},400
 

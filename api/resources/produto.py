@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from ..models.produto import ProdutoModel
-from ..models.categoria import CategoriaModel
+
 
 class Produtos():
     def get():
