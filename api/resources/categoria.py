@@ -36,7 +36,6 @@ class Categoria():
 
         categoriaEncontrada = CategoriaModel.find_categoria(id)
         if categoriaEncontrada:
-            print('Categoria encontrada')
             categoriaEncontrada.update_categoria(**dados)
             categoriaEncontrada.save_categoria()
             return categoriaEncontrada.json(), 200
