@@ -29,9 +29,10 @@ banco.init_app(app)
 # app.run(debug=True)
 
 manager = Manager(app)
-from .routes import fornecedor, usuario, produto, autenticacao, categoria
+from .routes import fornecedor, usuario, produto, autenticacao, categoria, movimentacao
 from .resources.fornecedor import Fornecedores, Fornecedor, NovoFornecedor
 from .resources.usuario import Usuarios, Usuario, NovoUsuario
 from .resources.produto import Produtos, Produto, NovoProduto
-from .resources.categoria import Categorias, Categoria, NovaCategoria
 from .resources.autenticacao import Login, Logout
+from .resources.categoria import Categorias, Categoria, NovaCategoria
+from .resources.movimentacao import NovaMovimentacao, Movimentacoes

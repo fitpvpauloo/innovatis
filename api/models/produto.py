@@ -65,3 +65,9 @@ class ProdutoModel(banco.Model):
     def delete_produto(self):
         banco.session.delete(self)
         banco.session.commit()
+
+    def aumenta_quantidade(self, adicionais):
+        self.quantidade == self.quantidade + adicionais
+
+    def diminui_quantidade(self, removidos):
+        self.quantidade == self.quantidade - removidos
