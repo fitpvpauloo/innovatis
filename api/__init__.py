@@ -35,4 +35,4 @@ from .resources.usuario import Usuarios, Usuario, NovoUsuario
 from .resources.produto import Produtos, Produto, NovoProduto
 from .resources.autenticacao import Login, Logout
 from .resources.categoria import Categorias, Categoria, NovaCategoria
-from .resources.movimentacao import NovaMovimentacao, Movimentacoes
+from .resources.movimentacao import NovaMovimentacao, Movimentacoes, Movimentacao

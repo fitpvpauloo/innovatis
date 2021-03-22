@@ -55,7 +55,12 @@ class Movimentacoes():
     def get():
         return {'movimentacoes': [movimentacao.json() for movimentacao in MovimentacaoModel.query.all()]}
 
-
+class Movimentacao():
+    def get(id):
+        movimentacao = MovimentacaoModel.find_movimentacao(id)
+        if movimentacao:
+            return movimentacao.json()
+        return {"message": "Movimentacação não encontrada!"}, 404
 class NovaMovimentacao():
     def post():
         dados = atributos.parse_args()

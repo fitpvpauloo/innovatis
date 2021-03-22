@@ -1,5 +1,6 @@
 from .sql_alchemy import banco
-
+from .usuario import UsuarioModel
+from .produto import ProdutoModel
 class MovimentacaoModel(banco.Model):
     __tablename__ = 'MOVIMENTACAO'
 
@@ -19,8 +20,21 @@ class MovimentacaoModel(banco.Model):
         self.data_hora = data_hora
         self.id_usuario = id_usuario
         self.id_produto = id_produto
+       
 
     def json(self):
+        try:
+            usuario = UsuarioModel.find_usuario(self.id_usuario)
+            login_usuario = usuario.login
+        except:
+            login_usuario = ""
+
+        try:
+            produto = ProdutoModel.find_produto(self.id_produto)
+            nome_produto = produto.nome_produto
+        except:
+            nome_produto = ""
+
         return {
           'idmovimentacao': self.idmovimentacao,
           'quantidade': self.quantidade,
@@ -28,6 +42,8 @@ class MovimentacaoModel(banco.Model):
           'data_hora': self.data_hora,
           'id_usuario': self.id_usuario,
           'id_produto': self.id_produto,
+          'login_usuario': login_usuario,
+          'nome_produto': nome_produto
         }
 
     @classmethod
