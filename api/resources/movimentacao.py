@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from ..models.movimentacao import MovimentacaoModel
 from ..models.produto import ProdutoModel
 from ..models.usuario import UsuarioModel
+import datetime
 
 atributos = reqparse.RequestParser()
 atributos.add_argument('quantidade')
@@ -9,12 +10,14 @@ atributos.add_argument('tipo_movimentacao')
 atributos.add_argument('id_usuario')
 atributos.add_argument('id_produto')
 
+f = '%Y-%m-%d %H:%M:%S'
+
 def validaQuantidade(quantidade):
     try:
-        if int(quantidade) < 0:
-            return "Quantidade inválida! Informe uma quantidade maior ou igual à zero."
+        if int(quantidade) <= 0:
+            return "Quantidade inválida! Informe uma quantidade maior que zero."
     except:
-        return "Quantidade inválida! Informe uma quantidade maior ou igual à zero."
+        return "Quantidade inválida! Informe uma quantidade maior que zero."
     return ""
 
 def validaProduto(idproduto, tipo_movimentacao, quantidade):
@@ -25,7 +28,7 @@ def validaProduto(idproduto, tipo_movimentacao, quantidade):
         if int(idproduto) <= 0:
             return "Produto inválido! Informe um id produto maior ou igual à zero."
 
-        produto = ProdutoModel.find_produto(produto)
+        produto = ProdutoModel.find_produto(idproduto)
         if not produto:
             return "Produto não encontrado."
 
@@ -41,7 +44,7 @@ def validaUsuario(idusuario):
             return "Usuário inválido! Informe um id de usuário maior ou igual à zero."
 
         usuario = UsuarioModel.find_usuario(idusuario)
-        if not fornecedor:
+        if not usuario:
             return "Usuário não encontrado"
     except:
         return "Usuário inválido!"
@@ -57,20 +60,23 @@ class NovaMovimentacao():
     def post():
         dados = atributos.parse_args()
 
-        errorMessage = validaProduto(dados.quantidade)
-        if errorMessage != "":
-            return {"message": errorMessage}, 400
-        
-        errorMessage = validaCategoria(dados.id_produto, dados.tipo_movimentacao, dados.quantidade)
+        errorMessage = validaUsuario(dados.id_usuario)
         if errorMessage != "":
             return {"message": errorMessage}, 400
 
-        errorMessage = validaFornecedor(dados.id_usuario)
+        errorMessage = validaQuantidade(dados.quantidade)
         if errorMessage != "":
             return {"message": errorMessage}, 400
 
-        movimentacao = MovimentacaoModel(None, **dados)
-        produto = ProdutoModel.find_produto(id_produto)
+        errorMessage = validaProduto(dados.id_produto, dados.tipo_movimentacao, dados.quantidade)
+        if errorMessage != "":
+            return {"message": errorMessage}, 400
+
+
+        data_hora = datetime.datetime.now()
+
+        movimentacao = MovimentacaoModel(None, dados.quantidade, dados.tipo_movimentacao, data_hora.strftime(f), dados.id_usuario, dados.id_produto)
+        produto = ProdutoModel.find_produto(dados.id_produto)
 
         if dados.tipo_movimentacao == 'SAIDA':
             produto.diminui_quantidade(dados.quantidade)
@@ -78,13 +84,15 @@ class NovaMovimentacao():
             produto.aumenta_quantidade(dados.quantidade)
 
         try:
-          produto.save_produto()
+            produto.save_produto()
         except:
-          return {"message": "Ocorreu um erro ao tentar atualizar o estoque do produto"}
+            return {"message": "Ocorreu um erro ao tentar atualizar o estoque do produto"}, 500
 
         try:
-          movimentacao.save_movimentacao()
+            movimentacao.save_movimentacao()
         except:
-          return {"message": "Ocorreu um erro ao tentar salvar a movimentação"}
+            return {"message": "Ocorreu um erro ao tentar salvar a movimentação"}, 500
+
+        return {"message": "Movimentação gravada com sucesso!"}, 200
 
         

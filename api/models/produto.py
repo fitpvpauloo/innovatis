@@ -67,7 +67,13 @@ class ProdutoModel(banco.Model):
         banco.session.commit()
 
     def aumenta_quantidade(self, adicionais):
-        self.quantidade == self.quantidade + adicionais
+        print(self.quantidade)
+        print(adicionais)
+        self.quantidade = int(self.quantidade) + int(adicionais)
+        print(self.quantidade)
 
     def diminui_quantidade(self, removidos):
-        self.quantidade == self.quantidade - removidos
+        print(self.quantidade)
+        print(removidos)
+        self.quantidade = int(self.quantidade) - int(removidos)
+        print(self.quantidade)
