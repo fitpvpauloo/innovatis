@@ -3,6 +3,7 @@ from flask_restful import Api
 from .env import DATABASE_URI, JWT_KEY, ACCESS_EXPIRES
 from flask_script import Manager
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from .blacklist import BLACKLIST
 import os
 
@@ -12,6 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = JWT_KEY
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = ACCESS_EXPIRES
 app.config['JWT_BLACKLIST_ENABLED'] = True
+
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 api = Api(app)
 jwt = JWTManager(app)
