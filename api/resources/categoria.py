@@ -4,7 +4,7 @@ from ..models.categoria import CategoriaModel
 
 class Categorias():
     def get():
-        return {[categoria.json() for categoria in CategoriaModel.query.all()]}
+        return {'categorias': [categoria.json() for categoria in CategoriaModel.query.all()]}
 
 class NovaCategoria():
     def post():
