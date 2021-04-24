@@ -5,7 +5,7 @@ from flask import jsonify
 
 class Fornecedores():
     def get():
-        x = fornecedor.json() for fornecedor in FornecedorModel.query.all()
+        x = [fornecedor.json() for fornecedor in FornecedorModel.query.all()]
         print(x)
         return jsonify(x)
 
