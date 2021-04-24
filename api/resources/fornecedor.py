@@ -4,8 +4,7 @@ from ..models.fornecedor import FornecedorModel
 
 class Fornecedores():
     def get():
-        #return {'fornecedores': [fornecedor.json() for fornecedor in FornecedorModel.query.all()]}
-        return {fornecedor.json() for fornecedor in FornecedorModel.query.all()}
+        return {'fornecedores': [fornecedor.json() for fornecedor in FornecedorModel.query.all()]}
 
 class NovoFornecedor():
     def post():
