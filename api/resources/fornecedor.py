@@ -1,10 +1,11 @@
 from flask_restful import Resource, reqparse
 from ..models.fornecedor import FornecedorModel
+from flask import jsonify
 
 
 class Fornecedores():
     def get():
-        return (fornecedor.json() for fornecedor in FornecedorModel.query.all(),)
+        return jsonify(fornecedor.json() for fornecedor in FornecedorModel.query.all())
 
 class NovoFornecedor():
     def post():
