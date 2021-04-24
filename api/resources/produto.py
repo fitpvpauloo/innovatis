@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from ..models.produto import ProdutoModel
 from ..models.categoria import CategoriaModel
 from ..models.fornecedor import FornecedorModel
+from flask import jsonify
 
 atributos = reqparse.RequestParser()
 atributos.add_argument('nome_produto')
@@ -44,7 +45,7 @@ def validaFornecedor(fornecedor):
 
 class Produtos():
     def get():
-        return {'produtos': [produto.json() for produto in ProdutoModel.query.all()]}
+        return jsonify([produto.json() for produto in ProdutoModel.query.all()])
 
 class NovoProduto():
     def post():

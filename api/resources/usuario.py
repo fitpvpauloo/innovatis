@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from ..models.usuario import UsuarioModel
 import bcrypt
+from flask import jsonify
 
 atributos = reqparse.RequestParser()
 atributos.add_argument('nome')
@@ -9,7 +10,7 @@ atributos.add_argument('senha')
 
 class Usuarios():
     def get():
-        return {'usuarios': [usuario.json() for usuario in UsuarioModel.query.all()]}
+        return jsonify([usuario.json() for usuario in UsuarioModel.query.all()])
 
 class NovoUsuario():
     def post():

@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from ..models.movimentacao import MovimentacaoModel
 from ..models.produto import ProdutoModel
 from ..models.usuario import UsuarioModel
+from flask import jsonify
 import datetime
 
 atributos = reqparse.RequestParser()
@@ -53,7 +54,7 @@ def validaUsuario(idusuario):
 
 class Movimentacoes():
     def get():
-        return {'movimentacoes': [movimentacao.json() for movimentacao in MovimentacaoModel.query.all()]}
+        return jsonify([movimentacao.json() for movimentacao in MovimentacaoModel.query.all()])
 
 class Movimentacao():
     def get(id):

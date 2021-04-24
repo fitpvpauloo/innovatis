@@ -1,10 +1,10 @@
 from flask_restful import Resource, reqparse
 from ..models.categoria import CategoriaModel
-
+from flask import jsonify
 
 class Categorias():
     def get():
-        return {'categorias': [categoria.json() for categoria in CategoriaModel.query.all()]}
+        return jsonify([categoria.json() for categoria in CategoriaModel.query.all()])
 
 class NovaCategoria():
     def post():
