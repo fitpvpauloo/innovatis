@@ -17,7 +17,7 @@ class Login():
 
         if usuario and  bcrypt.checkpw(dados.senha.encode('utf8'), usuario.senha.encode('utf8')):
             token_acesso = create_access_token(identity=usuario.idusuario)
-            return {"token": token_acesso}, 200
+            return {"token": token_acesso, "idUsuario": usuario.idusuario}, 200
         return {"message": "Usuário ou senha incorretos."}, 401
 
 class Logout():
