@@ -52,7 +52,7 @@ class Categoria():
         if categoria:
             produto = ProdutoModel.find_categoria_produto(categoria.idcategoria)
             if produto:
-                return {"message": "Não é possível excluir um categoria com produto cadastrado!"}, 400
+                return {"message": "Não é possível excluir uma categoria com produto já cadastrado!"}, 400
 
             try:
                 categoria.delete_categoria()

@@ -119,7 +119,7 @@ class Produto():
         if produto:
             movimentacao = MovimentacaoModel.find_movimentacaoProduto(produto.idproduto)
             if movimentacao:
-                return {"message": "Não é possível excluir um produto que já tenha movimentação lançada!"}, 400
+                return {"message": "Não é possível excluir um produto com movimentação já cadastrada!"}, 400
 
             try:
                 produto.delete_produto()

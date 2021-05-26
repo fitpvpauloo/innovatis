@@ -61,7 +61,7 @@ class Usuario():
         if usuario:
             movimentacao = MovimentacaoModel.find_movimentacaoUsuario(usuario.idusuario)
             if movimentacao:
-                return {"message": "Não é possível excluir usuário que já lançou movimentação!"}, 400
+                return {"message": "Não é possível excluir um usuário que já lançou movimentação!"}, 400
 
             try:
                 usuario.delete_usuario()
