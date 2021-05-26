@@ -52,6 +52,12 @@ class ProdutoModel(banco.Model):
             return produto
         return None
 
+    @classmethod
+    def find_categoria_produto(cls, id_categoria):
+        produto = cls.query.filter_by(id_categoria=id_categoria).first()
+        if produto:
+            return produto
+        return None
 
     def save_produto(self):
         banco.session.add(self)

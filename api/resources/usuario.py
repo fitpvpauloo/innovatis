@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from ..models.usuario import UsuarioModel
+from ..models.movimentacao import MovimentacaoModel
 import bcrypt
 from flask import jsonify
 
@@ -58,6 +59,10 @@ class Usuario():
     def delete(id):
         usuario = UsuarioModel.find_usuario(id)
         if usuario:
+            movimentacao = MovimentacaoModel.find_movimentacaoUsuario(usuario.idusuario)
+            if movimentacao:
+                return {"message": "Não é possível excluir usuário que já lançou movimentação!"}, 400
+
             try:
                 usuario.delete_usuario()
             except:

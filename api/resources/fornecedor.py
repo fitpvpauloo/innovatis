@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from ..models.fornecedor import FornecedorModel
+from ..models.produto import ProdutoModel
 from flask import jsonify
 
 
@@ -51,6 +52,10 @@ class Fornecedor():
     def delete(id):
         fornecedor = FornecedorModel.find_fornecedor(id)
         if fornecedor:
+            produto = ProdutoModel.find_fornecedor_produto(fornecedor.idfornecedor)
+            if produto:
+                return {"message": "Não é possível excluir um fornecedor com produto já cadastrado!"}, 400
+
             try:
                 fornecedor.delete_fornecedor()
             except:

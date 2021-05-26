@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from ..models.categoria import CategoriaModel
+from ..models.produto import ProdutoModel
 from flask import jsonify
 
 class Categorias():
@@ -49,6 +50,10 @@ class Categoria():
     def delete(id):
         categoria = CategoriaModel.find_categoria(id)
         if categoria:
+            produto = ProdutoModel.find_categoria_produto(categoria.idcategoria)
+            if produto:
+                return {"message": "Não é possível excluir um categoria com produto cadastrado!"}, 400
+
             try:
                 categoria.delete_categoria()
             except:

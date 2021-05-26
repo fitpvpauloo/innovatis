@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from ..models.produto import ProdutoModel
 from ..models.categoria import CategoriaModel
 from ..models.fornecedor import FornecedorModel
+from ..models.movimentacao import MovimentacaoModel
 from flask import jsonify
 
 atributos = reqparse.RequestParser()
@@ -116,6 +117,10 @@ class Produto():
     def delete(id):
         produto = ProdutoModel.find_produto(id)
         if produto:
+            movimentacao = MovimentacaoModel.find_movimentacaoProduto(produto.idproduto)
+            if movimentacao:
+                return {"message": "Não é possível excluir um produto que já tenha movimentação lançada!"}, 400
+
             try:
                 produto.delete_produto()
             except:

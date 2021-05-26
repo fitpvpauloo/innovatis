@@ -53,6 +53,19 @@ class MovimentacaoModel(banco.Model):
             return movimentacao
         return None
 
+    @classmethod
+    def find_movimentacaoProduto(cls, id_produto):
+        movimentacao = cls.query.filter_by(id_produto=id_produto).first()
+        if movimentacao:
+            return movimentacao
+        return None
+
+    @classmethod
+    def find_movimentacaoUsuario(cls, id_usuario):
+        movimentacao = cls.query.filter_by(id_usuario=id_usuario).first()
+        if movimentacao:
+            return movimentacao
+        return None
 
     def save_movimentacao(self):
         banco.session.add(self)
