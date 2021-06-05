@@ -98,7 +98,10 @@ class Produto():
             return {"message": errorMessage}, 400
 
         if ProdutoModel.find_nome_produto(dados.nome_produto):
-            return {"message": "Produto com nome: '{}' já cadastrado.".format(dados.nome_produto)},400
+            produto = ProdutoModel.find_nome_produto(dados.nome_produto)
+            print(produto.idproduto)
+            if (produto.idproduto != id):
+                return {"message": "Produto com nome: '{}' já cadastrado.".format(dados.nome_produto)},400
 
         produtoEncontrado = ProdutoModel.find_produto(id)
         if produtoEncontrado:
