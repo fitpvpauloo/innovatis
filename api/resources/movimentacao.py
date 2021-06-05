@@ -54,7 +54,7 @@ def validaUsuario(idusuario):
 
 class Movimentacoes():
     def get():
-        return jsonify([movimentacao.json() for movimentacao in MovimentacaoModel.query.all()])
+        return jsonify([movimentacao.json() for movimentacao in MovimentacaoModel.query.order_by(MovimentacaoModel.idmovimentacao.desc()).limit(10).all()])
 
 class Movimentacao():
     def get(id):
