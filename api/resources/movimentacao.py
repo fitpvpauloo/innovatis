@@ -1,3 +1,4 @@
+from api import logsplunk
 from flask_restful import Resource, reqparse
 from ..models.movimentacao import MovimentacaoModel
 from ..models.produto import ProdutoModel
@@ -95,6 +96,10 @@ class NovaMovimentacao():
             return {"message": "Ocorreu um erro ao tentar atualizar o estoque do produto"}, 500
 
         try:
+            try:      
+                logsplunk({"Movimentação": movimentacao.json()})
+            except:
+                None
             movimentacao.save_movimentacao()
         except:
             return {"message": "Ocorreu um erro ao tentar salvar a movimentação"}, 500

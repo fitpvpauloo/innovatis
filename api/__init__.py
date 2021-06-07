@@ -5,7 +5,19 @@ from flask_script import Manager
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from .blacklist import BLACKLIST
-import os
+import requests, json
+
+
+def logsplunk(myjson):
+        # ENDPOINT DA CHAMADA
+        # url = 'http://localhost:8088/services/collector/event/1.0'
+        url = 'http://spaceps.ddns.net:8222/services/collector/event/1.0'
+        headers = {'Content-Type': 'application/json', 'Authorization': 'Splunk 6a83d080-f7f0-4a7e-bf44-4189fc34a9a4'}
+        # BODY DO POSTMAN PASSADO PARA EFETUAR O METODO POST
+        payload = [{"event": f"{json.dumps(myjson)}","sourcetype": "json_no_timestamp"}]
+        r = requests.post(url, json=payload, headers=headers)
+        print('Log Splunk: ', r.text)
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
@@ -39,3 +51,4 @@ from .resources.produto import Produtos, Produto, NovoProduto
 from .resources.autenticacao import Login, Logout
 from .resources.categoria import Categorias, Categoria, NovaCategoria
 from .resources.movimentacao import NovaMovimentacao, Movimentacoes, Movimentacao
+
