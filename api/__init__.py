@@ -22,7 +22,7 @@ def logsplunk(myjson):
 app = Flask(__name__)
 
 json_logging.ENABLE_JSON_LOGGING = True
-json_logging.init(framework_name='flask')
+json_logging.__init(framework_name='flask')
 json_logging.init_request_instrument(app)
 
 
