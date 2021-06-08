@@ -1,5 +1,5 @@
 from api import manager, app
-import os    
+import os
 
 
 if __name__ == "__main__":

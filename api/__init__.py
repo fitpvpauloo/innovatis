@@ -6,7 +6,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from .blacklist import BLACKLIST
 import requests, json
-
+import json_logging
 
 def logsplunk(myjson):
         # ENDPOINT DA CHAMADA
@@ -20,6 +20,16 @@ def logsplunk(myjson):
 
 
 app = Flask(__name__)
+
+json_logging.ENABLE_JSON_LOGGING = 'True'
+json_logging.init(framework_name='flask')
+json_logging.init_request_instrument(app)
+
+# init the logger as usual
+# logger = logging.getLogger("test-logger")
+# logger.setLevel(logging.DEBUG)
+# logger.addHandler(logging.FileHandler(filename='json.log'))
+
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = JWT_KEY
