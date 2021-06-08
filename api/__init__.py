@@ -5,7 +5,7 @@ from flask_script import Manager
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from .blacklist import BLACKLIST
-import requests, json, json_logging
+import requests, json
 
 
 def logsplunk(myjson):
@@ -20,10 +20,6 @@ def logsplunk(myjson):
 
 
 app = Flask(__name__)
-
-json_logging.ENABLE_JSON_LOGGING = True
-json_logging.__init(framework_name='flask')
-json_logging.init_request_instrument(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
