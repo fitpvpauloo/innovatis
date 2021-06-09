@@ -40,6 +40,8 @@ class ProdutoModel(banco.Model):
             'nome_produto':self.nome_produto,
             'status_produto':self.status_produto,
             'quantidade':self.quantidade,
+            'id_categoria':self.id_categoria,
+            'id_fornecedor':self.id_fornecedor,
             'fornecedor':razao_social,
             'categoria':nome_categoria, 
         }
