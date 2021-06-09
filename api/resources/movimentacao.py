@@ -97,7 +97,7 @@ class NovaMovimentacao():
         
         try:  
             try:
-                logsplunk({"Movimentação": movimentacao.json()})
+                logsplunk({"Movimentação": movimentacao.jsonSplunk()})
             except:
                 None
 

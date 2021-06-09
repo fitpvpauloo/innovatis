@@ -40,12 +40,36 @@ class MovimentacaoModel(banco.Model):
           'idmovimentacao': self.idmovimentacao,
           'quantidade': self.quantidade,
           'tipo_movimentacao': self.tipo_movimentacao,
+          'data_hora': dt.strftime(self.data_hora, "%d/%m/%Y %H:%M:%S"),    
+          'id_usuario': self.id_usuario,
+          'id_produto': self.id_produto,
+          'login_usuario': login_usuario,
+          'nome_produto': nome_produto
+        }
+
+    def jsonSplunk(self):
+        try:
+            usuario = UsuarioModel.find_usuario(self.id_usuario)
+            login_usuario = usuario.login
+        except:
+            login_usuario = ""
+
+        try:
+            produto = ProdutoModel.find_produto(self.id_produto)
+            nome_produto = produto.nome_produto
+        except:
+            nome_produto = ""
+        return {
+          'idmovimentacao': self.idmovimentacao,
+          'quantidade': self.quantidade,
+          'tipo_movimentacao': self.tipo_movimentacao,
           'data_hora': dt.strftime(dt.strptime(self.data_hora, "%Y-%m-%d %H:%M:%S"), "%d/%m/%Y %H:%M:%S"),    
           'id_usuario': self.id_usuario,
           'id_produto': self.id_produto,
           'login_usuario': login_usuario,
           'nome_produto': nome_produto
         }
+
 
     @classmethod
     def find_movimentacao(cls, idmovimentacao):
