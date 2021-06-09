@@ -94,12 +94,13 @@ class NovaMovimentacao():
             produto.save_produto()
         except:
             return {"message": "Ocorreu um erro ao tentar atualizar o estoque do produto"}, 500
-
-        try:
-            try:      
+        
+        try:  
+            try:
                 logsplunk({"Movimentação": movimentacao.json()})
             except:
                 None
+
             movimentacao.save_movimentacao()
         except:
             return {"message": "Ocorreu um erro ao tentar salvar a movimentação"}, 500

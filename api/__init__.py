@@ -16,7 +16,7 @@ def logsplunk(myjson):
         # BODY DO POSTMAN PASSADO PARA EFETUAR O METODO POST
         payload = [{"event": f"{json.dumps(myjson)}","sourcetype": "json_no_timestamp"}]
         r = requests.post(url, json=payload, headers=headers)
-        print('Log Splunk: ', r.text)
+        # print('Log Splunk: ', r.text)
 
 
 app = Flask(__name__)
