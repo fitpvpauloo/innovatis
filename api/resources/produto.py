@@ -1,3 +1,4 @@
+from re import I
 from flask_restful import Resource, reqparse
 from ..models.produto import ProdutoModel
 from ..models.categoria import CategoriaModel
@@ -5,12 +6,14 @@ from ..models.fornecedor import FornecedorModel
 from ..models.movimentacao import MovimentacaoModel
 from flask import jsonify
 
+
 atributos = reqparse.RequestParser()
 atributos.add_argument('nome_produto')
 atributos.add_argument('status_produto')
 atributos.add_argument('quantidade')
 atributos.add_argument('id_fornecedor')
 atributos.add_argument('id_categoria')
+atributos.add_argument('razao_social')
 
 def validaQuantidade(quantidade):
     try:
@@ -45,9 +48,8 @@ def validaFornecedor(fornecedor):
     return ""
 
 class Produtos():
-    def get():
-        return jsonify([produto.json() for produto in ProdutoModel.query.all()])
-
+    def get():                
+        return jsonify([produto.json() for produto in ProdutoModel.query.join(FornecedorModel).filter(FornecedorModel.idfornecedor == ProdutoModel.id_fornecedor).all()])
 class NovoProduto():
     def post():
         dados = atributos.parse_args()

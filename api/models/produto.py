@@ -1,4 +1,7 @@
+from api.models import categoria
 from .sql_alchemy import banco
+from .categoria import CategoriaModel
+from .fornecedor import FornecedorModel
 
 class ProdutoModel(banco.Model):
     __tablename__ = 'PRODUTO'
@@ -9,11 +12,10 @@ class ProdutoModel(banco.Model):
     quantidade = banco.Column(banco.Integer)
     id_fornecedor = banco.Column(banco.Integer, banco.ForeignKey('FORNECEDOR.idfornecedor'))
     id_categoria = banco.Column(banco.Integer, banco.ForeignKey('CATEGORIA.idcategoria'))
-
-    # fornecedor = banco.relationship('FornecedorModel', foreign_keys=id_fornecedor)
+    # nome_fornecedor = banco.relationship('FornecedorModel', foreign_keys=id_fornecedor)
     # categoria = banco.relationship('CategoriaModel', foreign_keys=id_categoria)
 
-    def __init__(self, idproduto, nome_produto, status_produto, quantidade, id_fornecedor, id_categoria):        
+    def __init__(self, idproduto, nome_produto, status_produto, quantidade, id_fornecedor,  id_categoria):        
         self.idproduto = idproduto
         self.nome_produto = nome_produto
         self.status_produto = status_produto
@@ -22,13 +24,24 @@ class ProdutoModel(banco.Model):
         self.id_categoria = id_categoria
 
     def json(self):
+        try:
+            categoria = CategoriaModel.find_categoria(self.id_categoria)
+            nome_categoria = categoria.nome_categoria
+        except:
+            nome_categoria = ""
+
+        try:
+            fornecedor = FornecedorModel.find_fornecedor(self.id_fornecedor)
+            razao_social = fornecedor.razao_social
+        except:
+            razao_social = ""
         return {
             'idproduto':self.idproduto,
             'nome_produto':self.nome_produto,
             'status_produto':self.status_produto,
             'quantidade':self.quantidade,
-            'id_fornecedor':self.id_fornecedor,
-            'id_categoria':self.id_categoria            
+            'fornecedor':razao_social,
+            'categoria':nome_categoria, 
         }
 
     @classmethod
