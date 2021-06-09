@@ -11,7 +11,7 @@ atributos.add_argument('senha')
 
 class Usuarios():
     def get():
-        return jsonify([usuario.json() for usuario in UsuarioModel.query.filter(UsuarioModel.idusuario!=15)])
+        return jsonify([usuario.json() for usuario in UsuarioModel.query.filter(UsuarioModel.idusuario!=15).order_by(UsuarioModel.idusuario.desc())])
 
 class NovoUsuario():
     def post():

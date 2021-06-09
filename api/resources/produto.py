@@ -49,7 +49,7 @@ def validaFornecedor(fornecedor):
 
 class Produtos():
     def get():                
-        return jsonify([produto.json() for produto in ProdutoModel.query.join(FornecedorModel).filter(FornecedorModel.idfornecedor == ProdutoModel.id_fornecedor).all()])
+        return jsonify([produto.json() for produto in ProdutoModel.query.order_by(ProdutoModel.idproduto.desc()).all()])
 class NovoProduto():
     def post():
         dados = atributos.parse_args()

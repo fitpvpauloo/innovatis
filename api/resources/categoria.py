@@ -5,7 +5,7 @@ from flask import jsonify
 
 class Categorias():
     def get():
-        return jsonify([categoria.json() for categoria in CategoriaModel.query.all()])
+        return jsonify([categoria.json() for categoria in CategoriaModel.query.order_by(CategoriaModel.idcategoria.desc()).all()])
 
 class NovaCategoria():
     def post():
