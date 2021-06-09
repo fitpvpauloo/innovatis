@@ -21,6 +21,7 @@ def logsplunk(myjson):
 
 app = Flask(__name__)
 
+# init the logger as usual
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
