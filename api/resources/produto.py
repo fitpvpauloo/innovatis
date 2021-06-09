@@ -13,7 +13,7 @@ atributos.add_argument('status_produto')
 atributos.add_argument('quantidade')
 atributos.add_argument('id_fornecedor')
 atributos.add_argument('id_categoria')
-atributos.add_argument('razao_social')
+
 
 def validaQuantidade(quantidade):
     try:
