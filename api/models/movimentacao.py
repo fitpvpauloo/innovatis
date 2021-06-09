@@ -1,6 +1,8 @@
 from .sql_alchemy import banco
 from .usuario import UsuarioModel
 from .produto import ProdutoModel
+from datetime import datetime
+
 class MovimentacaoModel(banco.Model):
     __tablename__ = 'MOVIMENTACAO'
 
@@ -39,7 +41,7 @@ class MovimentacaoModel(banco.Model):
           'idmovimentacao': self.idmovimentacao,
           'quantidade': self.quantidade,
           'tipo_movimentacao': self.tipo_movimentacao,
-          'data_hora': self.data_hora,
+          'data_hora': datetime.strftime(self.data_hora, "%d/%m/%Y %H:%M:%S"),
           'id_usuario': self.id_usuario,
           'id_produto': self.id_produto,
           'login_usuario': login_usuario,
