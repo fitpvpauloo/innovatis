@@ -1,0 +1,45 @@
+<mat-sidenav-container class="container">
+    <mat-sidenav class="sidenav" mode="side" opened 
+        fixedInViewport="true" fixedTopGap="64">
+        <mat-nav-list class="nav-list">
+            
+            <a mat-list-item routerLink="/home">
+                <i class="fas fa-home"></i>
+                Início
+            </a>
+
+            <a mat-list-item  routerLink="/movimentacoes">
+                <i class="fas fa-box-open"></i>
+                Movimentações
+            </a>
+
+            <a mat-list-item  routerLink="/categorias">
+                <i class="far fa-list-alt"></i>
+                Categorias
+            </a>
+            
+            <a mat-list-item  routerLink="/produtos">
+                <i class="fas fa-truck-loading"></i>
+                Produtos
+            </a>
+            
+            <a mat-list-item  routerLink="/fornecedors">
+                <i class="fas fa-user-friends"></i>
+                Fornecedores
+            </a>
+
+            <a mat-list-item  routerLink="/" (click)="sair()">
+                <i class="fas fa-door-open"></i>
+                Sair
+            </a>
+            
+            <!-- <p style="color: white;padding: 0 16px;">
+                Usuário: <b class="font-size: 50px">{{loginUsuario}}</b>
+            </p> -->
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

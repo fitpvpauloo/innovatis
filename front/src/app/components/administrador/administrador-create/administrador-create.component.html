@@ -1,0 +1,33 @@
+<app-header></app-header>
+<app-nav-administrador></app-nav-administrador>
+
+
+<div class="box-div">
+
+<mat-card>
+    <mat-card-title>administrador</mat-card-title>
+    <form #clienteForm="ngForm">
+
+        <mat-form-field>
+            <input matInput placeholder="nome" [(ngModel)]="administrador.nome" name="nome" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="login" [(ngModel)]="administrador.login" name="login" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="password" mask="000000" matInput placeholder="senha" [(ngModel)]="administrador.senha" name="senha" required>
+        </mat-form-field>
+       
+    </form>
+    <button mat-raised-button (click)="createadministrador()" color="primary" [disabled]="!clienteForm.form.valid"> 
+        Salvar
+    </button>
+    
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card>
+
+</div>

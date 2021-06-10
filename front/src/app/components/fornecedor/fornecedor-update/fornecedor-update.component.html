@@ -1,0 +1,33 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+
+<div class="box-div">
+
+<mat-card>
+    
+    <mat-card-title>Alterar</mat-card-title>
+    
+    <form #clienteForm="ngForm">
+
+        <mat-form-field>
+            <input matInput placeholder="CNPJ" mask="00.000.000/0000-00" [(ngModel)]="fornecedor.cnpj" name="cnpj" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Razão social" [(ngModel)]="fornecedor.razao_social" name="razao_social" required>
+        </mat-form-field>
+
+    </form>
+
+    <button mat-raised-button (click)="updatefornecedor()" color="primary" [disabled]="!clienteForm.form.valid"> 
+        Atualizar
+    </button>
+    
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+
+</mat-card>
+
+</div>

@@ -1,0 +1,31 @@
+.sidenav {
+    background-color: #0a182f;
+    width: 200px;
+    top: 89px !important;
+}
+
+.sidenav a {
+    color: #a4acb9;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.sidenav a:hover {
+    color: white;
+}
+
+.sidenav i {
+    color: #0099c2;
+    padding-right: 10px;
+}
+
+.content {
+    padding: 16px;
+    background-color: #FFF;
+}
+
+.mat-list-base {
+    padding-top: 0 !important;
+}
+
+ 

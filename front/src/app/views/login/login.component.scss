@@ -1,0 +1,96 @@
+.bg-login{
+    background: #0a182f;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    @media(min-width: 0px) and (max-width: 767px) {
+    height: 100%;
+    }
+    .box{
+        padding: 0 0 59px 0;
+        @media(min-width: 0px) and (max-width: 767px) {
+            padding: 30px 0 23px 0;
+        }
+    }
+    .box-right{
+        background: white;
+        padding: 50px 70px 95px 70px;
+        width: 603px;
+        margin: 0 auto;
+        form{
+            @media(min-width: 0px) and (max-width: 767px) {
+                padding: 20px;
+            }
+        }
+        @media(min-width: 0px) and (max-width: 767px) {
+            width: 90%;
+            margin-bottom: 50px;
+            padding: 20px 0;
+            height: 400px;
+            border-radius: 10px;
+        }
+        h1{
+            font-size: 28px;
+            font-weight: bold;
+            color: #0a182f;
+            margin-bottom: 40px;
+            text-align: center;
+            margin: 0 0 15px 0;
+        }
+        p{
+            font-size: 18px;
+            color: #0a182f;
+            text-align: center;
+        }
+        input{
+            width: 100%;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 2px solid #0a182f;
+            outline: none;
+            
+        }
+        a{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            border: 1px solid #0a182f;
+            color: white;
+            background: #0a182f;
+            padding: 12px 55px;
+            border-radius: 100px;
+            outline: none; 
+            width: 250px;
+            text-decoration: none;
+            @media(min-width: 0px) and (max-width: 767px) {
+                width: 117px;
+            }
+        }
+        button{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            color: white;
+            padding: 4px 55px;
+            border-radius: 100px;
+            outline: none;
+            width: 188px;
+            float: left;
+            margin-right: 15px;
+            @media(min-width: 0px) and (max-width: 767px) {
+                margin: 0 auto;
+                display: block;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+             
+        }
+    }
+}
+ 
+
+
+:disabled {
+
+    background: red;
+  }

@@ -1,0 +1,54 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+
+<div class="box-div">
+
+    <mat-card>
+        <mat-card-title>Novo</mat-card-title>
+
+        <form #clienteForm="ngForm">
+
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select [(ngModel)]="produto.id_categoria" name="id_categoria" required>
+                    <mat-option *ngFor="let categorias of categorias" [value]="categorias.idcategoria">
+                        {{ categorias.nome_categoria }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Fornecedor</mat-label>
+                <mat-select [(ngModel)]="produto.id_fornecedor" name="id_fornecedor" required>
+                    <mat-option *ngFor="let fornecedors of fornecedors" [value]="fornecedors.idfornecedor">
+                        {{ fornecedors.razao_social }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>  
+
+            <mat-form-field>
+                <input matInput placeholder="Nome do produto" [(ngModel)]="produto.nome_produto" name="nome_produto" required>
+            </mat-form-field>
+
+            <label>Status produto</label>
+            <br>
+            <mat-radio-group [(ngModel)]="produto.status_produto" name="status_produto" required>
+                <mat-radio-button class="radio" value="ATIVO">ATIVO</mat-radio-button>
+                <mat-radio-button class="radio" value="INATIVO">INATIVO</mat-radio-button>
+            </mat-radio-group>
+            <br>
+
+        </form>
+
+        <button mat-raised-button (click)="createProduto()" color="primary" [disabled]="!clienteForm.form.valid">
+            Salvar
+        </button>
+
+        <button mat-raised-button (click)="cancel()">
+            Cancelar
+        </button>
+
+    </mat-card>
+
+</div>

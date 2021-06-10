@@ -1,0 +1,29 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+
+<div class="box-div">
+
+    <mat-card>
+    
+        <mat-card-title>Alterar</mat-card-title>
+        
+        <form #clienteForm="ngForm">
+
+            <mat-form-field>
+                <input matInput placeholder="Nome da categoria" [(ngModel)]="categoria.nome_categoria" name="nome_categoria" required>
+            </mat-form-field>
+
+        </form>
+        
+        <button mat-raised-button (click)="updatecategoria()" color="primary" [disabled]="!clienteForm.form.valid">
+            Atualizar
+        </button>
+
+        <button mat-raised-button (click)="cancel()">
+            Cancelar
+        </button>
+    
+    </mat-card>
+
+</div>

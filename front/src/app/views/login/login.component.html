@@ -1,0 +1,30 @@
+<section class="bg-login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 box">
+                <img src="assets/img/logo.png" style="margin: 0 auto; display: block;">
+            </div>
+
+            <div class="col-md-6 box-right">
+                <form #clienteForm="ngForm">
+                    <h1>Login</h1>
+
+                    <p>Entre com seus dados corretamente para acessar o sistema.</p>
+
+                    <input id="login" placeholder="Login" required [(ngModel)]="usuario.login" name="login">
+
+                    <input type="password" id="senha" placeholder="Senha" required [(ngModel)]="usuario.senha"
+                        name="senha">
+
+                        <button color="primary" mat-raised-button type="button"  (click)="login()" disabled
+                        [disabled]="!clienteForm.form.valid">Entrar</button>
+
+                    <button color="primary" mat-raised-button type="button" (click)="adm()" disabled
+                        [disabled]="!clienteForm.form.valid">Administrador</button>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>

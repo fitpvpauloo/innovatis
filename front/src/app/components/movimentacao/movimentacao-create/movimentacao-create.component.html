@@ -1,0 +1,50 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<div class="box-div">
+
+    <mat-card>
+
+        <mat-card-title>Movimentação: O ID do seu usuário é {{loginUsuario}}</mat-card-title>
+
+        <form #clienteForm="ngForm">
+
+            <mat-form-field>
+                <input matInput placeholder="Quantidade" type="text" mask="separator.2" separatorLimit="10000"
+                    thousandSeparator="." [(ngModel)]="movimentacao.quantidade" name="quantidade" required>
+            </mat-form-field>
+
+            <label>Tipo de movimentações</label>
+            <br>
+            <mat-radio-group [(ngModel)]="movimentacao.tipo_movimentacao" name="tipo_movimentacao" required>
+                <mat-radio-button class="radio" value="ENTRADA">Entrada</mat-radio-button>
+                <mat-radio-button class="radio" value="SAIDA">Saída</mat-radio-button>
+            </mat-radio-group>
+            <br>
+
+            <mat-form-field>
+                <input matInput [value]="loginUsuario" placeholder="ID usuário" name="id_usuario" disabled>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nome do produto</mat-label>
+                <mat-select [(ngModel)]="movimentacao.id_produto" name="nome_produto" required>
+                    <mat-option *ngFor="let produtos of produtos" [value]="produtos.idproduto">
+                        {{ produtos.nome_produto }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </form>
+
+        <button mat-raised-button (click)="createmovimentacao()" color="primary" [disabled]="!clienteForm.form.valid">
+            Salvar
+        </button>
+
+        <button mat-raised-button (click)="cancel()">
+            Cancelar
+        </button>
+
+    </mat-card>
+
+</div>

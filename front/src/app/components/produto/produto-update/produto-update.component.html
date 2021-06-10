@@ -1,0 +1,37 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+
+<div class="box-div">
+
+<mat-card>
+
+    <mat-card-title>Alterar</mat-card-title>
+    
+    <form #clienteForm="ngForm">
+
+        <mat-form-field>
+            <input matInput placeholder="Nome do produto" [(ngModel)]="produto.nome_produto" name="nome_produto" required>
+        </mat-form-field>
+        
+        <label>Status do produto</label>
+            <br>
+            <mat-radio-group [(ngModel)]="produto.status_produto" name="status_produto" required>
+                <mat-radio-button class="radio" value="ATIVO">ATIVO</mat-radio-button>
+                <mat-radio-button class="radio" value="INATIVO">INATIVO</mat-radio-button>
+            </mat-radio-group>
+            <br>
+       
+    </form>
+
+    <button mat-raised-button (click)="updateProduto()" color="primary" [disabled]="!clienteForm.form.valid">
+        Atualizar
+    </button>
+    
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+
+</mat-card>
+
+</div>
